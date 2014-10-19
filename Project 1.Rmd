@@ -27,7 +27,7 @@ celldata <- celldata[celldata$target_name == "mE1A",]
 head(celldata)
 ```
 
-Now I can focus on the viral load data. I'm going to start with analyzing the Atchoum data first, so I'm going to repeat the last step I did to isolate the Atchoum data.
+Now I can focus on the viral load data. I'm going to separate the Atc and B6 data into two different tables, using the same method I did to remove the GAPDH data.
 
 ```{r echo=FALSE}
 atc_celldata <- celldata[celldata$strain == "Atc",]
