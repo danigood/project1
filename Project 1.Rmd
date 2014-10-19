@@ -12,6 +12,7 @@ To test my hypothesis, I started with attempting to recapitulate the macrophage 
 I get the output in an excel document, which I converted to text documents, one for the cell fraction data and one for the supernatant fraction data. The first six lines of each are listed below, cell data first. 
 
 ```{r echo=FALSE}
+#load data into r studio
 celldata <- read.table(file="qPCR_Raw_Data_Cells.txt", header=T)
 superdata <- read.table(file="qPCR_Raw_Data_Supernatant.txt", header=T)
 head(celldata)
@@ -21,7 +22,16 @@ head(superdata)
 Let's start with the cell fraction data. I don't get quantifiable levels of DNA from the cell fraction so I have to use housekeeping genes to normalize the amount of DNA over all of the samples. I use GAPDH, so I get GAPDH output in my data. Since I use the qPCR machine program to normalize the data, I no longer need the GAPDH information, I only need the mE1A data (viral load data). So I want to delete all of the rows that contain GAPDH data. The first six rows of the modified data set are shown below.
 
 ```{r echo=FALSE}
+#remove GAPDH data
 celldata <- celldata[celldata$target_name == "mE1A",]
 head(celldata)
+```
+
+Now I can focus on the viral load data. When I load my samples into the qPCR plate, I do three replicates for each sample. So in the data output, there are three rows of data for each sample. I want to average the RQ data because that is the relevant data (it is the fold change in viral load with the C57BL/6 data set as a basepoint). The first six rows of the averaged data set are shown below.
+
+```{r}
+#average RQ data
+avg_celldata <- aggregate(.~sample_name, FUN=mean, data=celldata)
+head(avg_celldata)
 ```
 
