@@ -27,11 +27,26 @@ celldata <- celldata[celldata$target_name == "mE1A",]
 head(celldata)
 ```
 
-Now I can focus on the viral load data. When I load my samples into the qPCR plate, I do three replicates for each sample. So in the data output, there are three rows of data for each sample. I want to average the RQ data because that is the relevant data (it is the fold change in viral load with the C57BL/6 data set as a basepoint). The first six rows of the averaged data set are shown below.
+Now I can focus on the viral load data. I'm going to start with analyzing the Atchoum data first, so I'm going to repeat the last step I did to isolate the Atchoum data.
 
-```{r}
+```{r echo=FALSE}
+atc_celldata <- celldata[celldata$strain == "Atc",]
+head(atc_celldata)
+```
+
+
+When I load my samples into the qPCR plate, I do three replicates for each sample. So in the data output, there are three rows of data for each sample. I want to average the RQ data because that is the relevant data (it is the fold change in viral load with the C57BL/6 data set as a basepoint). The first six rows of the averaged data set are shown below.
+
+```{r echo=FALSE}
 #average RQ data
 avg_celldata <- aggregate(.~sample_name, FUN=mean, data=celldata)
 head(avg_celldata)
+```
+
+After averaging the RQ data, I need to aggregate the data by time point. 
+
+```{r echo=FALSE}
+#plot data
+
 ```
 
