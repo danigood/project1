@@ -18,3 +18,4 @@ superdata <- read.table(file="qPCR_Raw_Data_Supernatant.txt", header=T)
 #metadata <- metadata[,-1]
 ```
 
+Let's start with the cell fraction data. I don't get quantifiable levels of DNA from the cell fraction so I have to use housekeeping genes to normalize the amount of DNA over all of the samples. I use GAPDH, so I get GAPDH output in my data. Since I use the qPCR machine program to normalize the data, I no longer need the GAPDH information, so I want to delete all of the rows that contain GAPDH data.
