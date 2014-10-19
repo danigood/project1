@@ -18,7 +18,7 @@ head(celldata)
 head(superdata)
 ```
 
-Let's start with the cell fraction data. I don't get quantifiable levels of DNA from the cell fraction so I have to use housekeeping genes to normalize the amount of DNA over all of the samples. I use GAPDH, so I get GAPDH output in my data. Since I use the qPCR machine program to normalize the data, I no longer need the GAPDH information, so I want to delete all of the rows that contain GAPDH data. The first six rows of the modified data set are shown below.
+Let's start with the cell fraction data. I don't get quantifiable levels of DNA from the cell fraction so I have to use housekeeping genes to normalize the amount of DNA over all of the samples. I use GAPDH, so I get GAPDH output in my data. Since I use the qPCR machine program to normalize the data, I no longer need the GAPDH information, I only need the mE1A data (viral load data). So I want to delete all of the rows that contain GAPDH data. The first six rows of the modified data set are shown below.
 
 ```{r echo=FALSE}
 celldata <- celldata[celldata$target_name == "mE1A",]
