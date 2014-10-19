@@ -31,9 +31,10 @@ Now I can focus on the viral load data. I'm going to start with analyzing the At
 
 ```{r echo=FALSE}
 atc_celldata <- celldata[celldata$strain == "Atc",]
+b6_celldata <- celldata[celldata$strain == "B6"]
 head(atc_celldata)
+head(b6_celldata)
 ```
-
 
 When I load my samples into the qPCR plate, I do three replicates for each sample. So in the data output, there are three rows of data for each sample. I want to average the RQ data because that is the relevant data (it is the fold change in viral load with the C57BL/6 data set as a basepoint). The first six rows of the averaged data set are shown below.
 
