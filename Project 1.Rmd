@@ -49,17 +49,16 @@ After averaging the RQ data, I need to aggregate the data by time point.
 
 ```{r echo=FALSE}
 #average the data by time point
-group_atc_celldata <- aggregate(.~time_point, FUN=mean, data=avg_atc_celldata)
-group_b6_celldata <- aggregate(.~time_point, FUN=mean, data=avg_b6_celldata)
+#group_atc_celldata <- aggregate(.~time_point, FUN=mean, data=avg_atc_celldata)
+#group_b6_celldata <- aggregate(.~time_point, FUN=mean, data=avg_b6_celldata)
 ```
 
 Now that I have the average of all my samples for each of the time points, I want to plot the data so I can see it.
 
 ```{r echo=FALSE}
 #plot the data
-
 compiled <- rbind(avg_b6_celldata,avg_atc_celldata)
-data <- tapply(compiled$RQ, list(xyz$strain,xyz$time_point), sum)
+data <- tapply(compiled$RQ, list(compiled$strain,compiled$time_point), sum)
 barplot(data,beside=T,col=c("blue","orange")
 ,main="Cell Fraction Data",xlab="Time Point",ylab="Fold Change Over C57BL/6")
 ```
