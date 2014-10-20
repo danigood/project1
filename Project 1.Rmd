@@ -62,6 +62,8 @@ barplot(group_atc_celldata$RQ, names.arg=group_atc_celldata$time_point, xlab="Ho
 barplot(group_b6_celldata$RQ, names.arg=group_b6_celldata$time_point, xlab="Hours Post Infection", ylab="Fold Change Over C57BL/6", add=T)
 ```
 
+Now that I've visualized the data, I have an idea of whether the difference between the viral loads in the Atchoum versus C57BL/6 macrophages is going to be significantly different. I need to do some t-tests to confirm my hypothesis. I will do two sided t-tests for each time point, comparing the Atchoum macrophage viral loads to the C57BL/6 macrophage viral loads. See t-test output below.
+
 ```{r echo=FALSE}
 #analyze data
 t.test(avg_atc_celldata$RQ[avg_atc_celldata$time_point == 24], avg_b6_celldata$RQ[avg_b6_celldata$time_point == 24])
