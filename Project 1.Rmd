@@ -62,7 +62,7 @@ barplot(group_atc_celldata$RQ, names.arg=group_atc_celldata$time_point, xlab="Ho
 barplot(group_b6_celldata$RQ, names.arg=group_b6_celldata$time_point, xlab="Hours Post Infection", ylab="Fold Change Over C57BL/6", add=T)
 ```
 
-Now that I've visualized the data, I have an idea of whether the difference between the viral loads in the Atchoum versus C57BL/6 macrophages is going to be significantly different. I need to do some t-tests to confirm my hypothesis. I will do two sided t-tests for each time point, comparing the Atchoum macrophage viral loads to the C57BL/6 macrophage viral loads. See t-test output below.
+Now that I've visualized the data, I have an idea of whether the difference between the viral loads in the Atchoum versus C57BL/6 macrophages is going to be significantly different. I need to do some t-tests to confirm my hypothesis. I will do two sided t-tests for each time point, comparing the Atchoum macrophage viral loads to the C57BL/6 macrophage viral loads. See t-test outputs below, in order from 24 hours post infection to 72 hours post infection.
 
 ```{r echo=FALSE}
 #analyze data
@@ -71,11 +71,11 @@ t.test(avg_atc_celldata$RQ[avg_atc_celldata$time_point == 48], avg_b6_celldata$R
 t.test(avg_atc_celldata$RQ[avg_atc_celldata$time_point == 72], avg_b6_celldata$RQ[avg_b6_celldata$time_point == 72])
 ```
 
-Now to the supernatant data.
+That completes my analysis of the cellular fraction. Now I want to look at the supernatant data. I'm going to start again by separating the Atchoum and C57BL/6 data. See the head of the C57BL/6 table below.
+
 ```{r echo=FALSE}
 atc_superdata <- superdata[celldata$strain == "Atc",]
 b6_superdata <- superdata[celldata$strain == "B6",]
-head(atc_superdata)
 head(b6_superdata)
 ```
 
