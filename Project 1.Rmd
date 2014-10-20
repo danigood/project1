@@ -1,6 +1,6 @@
 ---
 title: "Goodman Project 1"
-output: word_document
+output: html_document
 ---
 
 In my project, I work with mouse adenovirus type 1 (MAV-1). Specifically, I'm looking at a cellular kinase and its potential role in antiviral defense. Canonically, protein kinase R (PKR) responds to the presence of double-stranded RNA and it becomes activated to phosphorylate the transcription factor eIF2alpha. When phosphorylated, eIF2alpha halts protein synthesis. GCN2 (general control nonderepressible 2) is another kinase that phosphorylates eIF2alpha; it's activated by amino acid deprivation and UV irradiation. However, recent studies have shown that GCN2 is also activated by Sindbis virus (Berlanga et al., 2006) and HIV-1 (Cosnefroy et al., 2013). I hypothesize that GCN2 is also important during MAV-1 infection.
@@ -78,10 +78,16 @@ head(b6_superdata)
 ```
 
 
-```{r}
+```{r echo=FALSE}
 #average the data replicates quantity
 avg_atc_superdata <- aggregate(.~sample_name, FUN=mean, data=atc_superdata)
 avg_b6_superdata <- aggregate(.~sample_name, FUN=mean, data=b6_superdata)
 head(avg_b6_superdata)
+```
+
+```{r echo=FALSE}
+#average the data by time point
+group_atc_superdata <- aggregate(.~time_point, FUN=mean, data=avg_atc_superdata)
+group_b6_superdata <- aggregate(.~time_point, FUN=mean, data=avg_b6_superdata)
 ```
 
