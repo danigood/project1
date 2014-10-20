@@ -45,23 +45,24 @@ avg_b6_celldata <- aggregate(.~sample_name, FUN=mean, data=b6_celldata)
 head(avg_b6_celldata)
 ```
 
-After averaging the RQ data, I need to aggregate the data by time point. 
-
-```{r echo=FALSE}
-#average the data by time point
-#group_atc_celldata <- aggregate(.~time_point, FUN=mean, data=avg_atc_celldata)
-#group_b6_celldata <- aggregate(.~time_point, FUN=mean, data=avg_b6_celldata)
-```
-
-Now that I have the average of all my samples for each of the time points, I want to plot the data so I can see it.
+Now that I have the average of all my samples, I want to plot the data so I can see it.
 
 ```{r echo=FALSE}
 #plot the data
-compiled <- rbind(avg_b6_celldata,avg_atc_celldata)
+atc24_celldata <- avg_atc_celldata[avg_atc_celldata$time_point == 24,]
+atc48_celldata <- avg_atc_celldata[avg_atc_celldata$time_point == 48,]
+atc72_celldata <- avg_atc_celldata[avg_atc_celldata$time_point == 72,]
+b624_celldata <- avg_b6_celldata[avg_b6_celldata$time_point == 24,]
+b648_celldata <- avg_b6_celldata[avg_b6_celldata$time_point == 48,]
+b672_celldata <- avg_b6_celldata[avg_b6_celldata$time_point == 72,]
+xbar <- c(mean(atc24_celldata$RQ), mean(b624_celldata$RQ), mean(atc48_celldata$RQ), mean(b648_celldata$RQ), mean(atc72_celldata$RQ),mean(b672_celldata$RQ))
+sd <- c(sd(atc24_celldata$RQ), sd(b624_celldata$RQ), sd(atc48_celldata$RQ), sd(b648_celldata$RQ), sd(atc72_celldata$RQ),sd(b672_celldata$RQ))
+compiled <- rbind(avg_atc_celldata,avg_b6_celldata)
 data <- tapply(compiled$RQ, list(compiled$strain,compiled$time_point), mean)
-barplot(data,beside=T,col=c("blue","orange")
-,main="Cell Fraction Data",xlab="Time Point",ylab="Fold Change Over C57BL/6")
-legend(1,2.5,c("Atchoum","C57BL/6"),fill=c("blue","orange"))
+mp <- barplot(data,beside=T,col=c("blue","orange"), ylim=c(0,4),main="Cell Fraction Data",xlab="Hours Post Infection",ylab="Fold Change Over C57BL/6")
+segments(mp, xbar - sd, mp, xbar + sd, lwd=2)
+segments(mp - 0.1, xbar - sd, mp + 0.1, xbar - sd, lwd=2)
+segments(mp - 0.1, xbar + sd, mp + 0.1, xbar + sd, lwd=2)
 ```
 
 Now that I've visualized the data, I have an idea of whether the difference between the viral loads in the Atchoum versus C57BL/6 macrophages is going to be significantly different. I need to do some t-tests to confirm my hypothesis. I will do two sided t-tests for each time point, comparing the Atchoum macrophage viral loads to the C57BL/6 macrophage viral loads. See t-test outputs below, in order from 24 hours post infection to 72 hours post infection.
