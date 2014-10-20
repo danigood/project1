@@ -91,11 +91,21 @@ avg_b6_superdata <- aggregate(.~sample_name, FUN=mean, data=b6_superdata)
 head(avg_b6_superdata)
 ```
 
-Next, I want to aggregate the data by time point.
-
+Now that I have the average of all the data, I want to graph it.
 ```{r echo=FALSE}
-#average the data by time point
-group_atc_superdata <- aggregate(.~time_point, FUN=mean, data=avg_atc_superdata)
-group_b6_superdata <- aggregate(.~time_point, FUN=mean, data=avg_b6_superdata)
+atc24_superdata <- avg_atc_superdata[avg_atc_superdata$time_point == 24,]
+atc48_superdata <- avg_atc_superdata[avg_atc_superdata$time_point == 48,]
+atc72_superdata <- avg_atc_superdata[avg_atc_superdata$time_point == 72,]
+b624_superdata <- avg_b6_superdata[avg_b6_superdata$time_point == 24,]
+b648_superdata <- avg_b6_superdata[avg_b6_superdata$time_point == 48,]
+b672_superdata <- avg_b6_superdata[avg_b6_superdata$time_point == 72,]
+xbarsuper <- c(mean(atc24_superdata$quantity), mean(b624_superdata$quantity), mean(atc48_superdata$quantity), mean(b648_superdata$quantity), mean(atc72_superdata$quantity),mean(b672_superdata$quantity))
+sdsuper <- c(sd(atc24_superdata$quantity), sd(b624_superdata$quantity), sd(atc48_superdata$quantity), sd(b648_superdata$quantity), sd(atc72_superdata$quantity),sd(b672_superdata$quantity))
+compiled <- rbind(avg_atc_superdata,avg_b6_superdata)
+data <- tapply(compiled$quantity, list(compiled$strain,compiled$time_point), mean)
+mpsuper <- barplot(data,beside=T,col=c("blue","orange"),main="Supernatant Fraction Data",xlab="Hours Post Infection",ylab="Genome Copies per 4 µL Supernatant",ylim=c(0,1e7))
+segments(mpsuper, xbarsuper - sdsuper, mpsuper, xbarsuper + sdsuper, lwd=2)
+segments(mpsuper - 0.1, xbarsuper - sdsuper, mpsuper + 0.1, xbarsuper - sdsuper, lwd=2)
+segments(mpsuper - 0.1, xbarsuper + sdsuper, mpsuper + 0.1, xbarsuper + sdsuper, lwd=2)
 ```
 
