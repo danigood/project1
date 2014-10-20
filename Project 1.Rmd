@@ -113,5 +113,5 @@ t.test(avg_atc_superdata$quantity[avg_atc_superdata$time_point == 48], avg_b6_su
 t.test(avg_atc_superdata$quantity[avg_atc_superdata$time_point == 72], avg_b6_superdata$quantity[avg_b6_superdata$time_point == 72])
 ```
 
-Data Summary:
+####Data Summary:
 In the cellular fraction, there was a significanct difference in the viral loads between the *Atchoum* and C57BL/6 macrophages (p<0.0001). In the supernatant fraction, there was no significant difference in the viral laods between the *Atchoum* and C57BL/6 supernatants. The cell fraction data does support my hypothesis that *Atchoum* macrophages will be more susceptible to infection by MAV-1. While the supernatant fraction did not support this result, it is possible that if I had assayed the supernatant at later time points (i.e. 96 hours), then I would begin to see an increased viral load in the *Atchoum* supernatant (since the viral load only became significantly higher within the cell at 72 hours post infection). Future directions for this project will include an in vivo appraoch of infecting the *Atchoum* and C57BL/6 mice themselves and harvesting the brains at 3, 5, and 7 days post infection to see if the viral loads differ between the *Atchoum* and C57BL/6 brains.
