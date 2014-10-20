@@ -79,6 +79,7 @@ b6_superdata <- superdata[celldata$strain == "B6",]
 head(b6_superdata)
 ```
 
+Again, like with the cellular data, I do three replicates of each sample in the qPCR plate so I need to average each of these replicates to get a single viral load quantity for each sample. Since there is no cellular DNA in this fraction, I did not have to worry about having housekeeping genes for normalization. I just purified DNA from the same amount of supernatant for each sample and I plated the same amount of purified DNA for each sample and just quantitated the viral load directly. See the head of the averaged C57BL/6 data table below.
 
 ```{r echo=FALSE}
 #average the data replicates quantity
