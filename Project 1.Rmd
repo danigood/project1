@@ -59,7 +59,7 @@ Now that I have the average of all my samples for each of the time points, I wan
 #plot the data
 par(mfrow = c(1,1))
 barplot(group_atc_celldata$RQ, names.arg=group_atc_celldata$time_point, xlab="Hours Post Infection", ylab="Fold Change Over C57BL/6")
-barplot(group_b6_celldata$RQ, names.arg=group_b6_celldata$time_point, xlab="Hours Post Infection", ylab="Fold Change Over C57BL/6")
+barplot(group_b6_celldata$RQ, names.arg=group_b6_celldata$time_point, xlab="Hours Post Infection", ylab="Fold Change Over C57BL/6", add=T)
 ```
 
 ```{r echo=FALSE}
