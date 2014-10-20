@@ -1,6 +1,6 @@
 ---
 title: "Goodman Project 1"
-output: html_document
+output: word_document
 ---
 
 In my project, I work with mouse adenovirus type 1 (MAV-1). Specifically, I'm looking at a cellular kinase and its potential role in antiviral defense. Canonically, protein kinase R (PKR) responds to the presence of double-stranded RNA and it becomes activated to phosphorylate the transcription factor eIF2alpha. When phosphorylated, eIF2alpha halts protein synthesis. GCN2 (general control nonderepressible 2) is another kinase that phosphorylates eIF2alpha; it's activated by amino acid deprivation and UV irradiation. However, recent studies have shown that GCN2 is also activated by Sindbis virus (Berlanga et al., 2006) and HIV-1 (Cosnefroy et al., 2013). I hypothesize that GCN2 is also important during MAV-1 infection.
@@ -50,12 +50,22 @@ After averaging the RQ data, I need to aggregate the data by time point.
 ```{r echo=FALSE}
 #average the data by time point
 group_atc_celldata <- aggregate(.~time_point, FUN=mean, data=avg_atc_celldata)
-group_atc_celldata <- aggregate(.~time_point, FUN=mean, data=avg_b6_celldata)
+group_b6_celldata <- aggregate(.~time_point, FUN=mean, data=avg_b6_celldata)
 ```
 
 Now that I have the average of all my samples for each of the time points, I want to plot the data so I can see it.
 
-```{r}
+```{r echo=FALSE}
+#plot the data
+par(mfrow = c(1,1))
+barplot(group_atc_celldata$RQ, names.arg=group_atc_celldata$time_point, xlab="Hours Post Infection", ylab="Fold Change Over C57BL/6")
+barplot(group_b6_celldata$RQ, names.arg=group_b6_celldata$time_point, xlab="Hours Post Infection", ylab="Fold Change Over C57BL/6")
+```
 
+```{r echo=FALSE}
+#analyze data
+t.test(avg_atc_celldata$RQ[avg_atc_celldata$time_point == 24], avg_b6_celldata$RQ[avg_b6_celldata$time_point == 24])
+t.test(avg_atc_celldata$RQ[avg_atc_celldata$time_point == 48], avg_b6_celldata$RQ[avg_b6_celldata$time_point == 48])
+t.test(avg_atc_celldata$RQ[avg_atc_celldata$time_point == 72], avg_b6_celldata$RQ[avg_b6_celldata$time_point == 72])
 ```
 
