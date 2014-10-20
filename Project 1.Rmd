@@ -77,8 +77,8 @@ t.test(avg_atc_celldata$RQ[avg_atc_celldata$time_point == 72], avg_b6_celldata$R
 That completes my analysis of the cellular fraction. Now I want to look at the supernatant data. I'm going to start again by separating the Atchoum and C57BL/6 data. See the head of the C57BL/6 table below.
 
 ```{r echo=FALSE}
-atc_superdata <- superdata[celldata$strain == "Atc",]
-b6_superdata <- superdata[celldata$strain == "B6",]
+atc_superdata <- superdata[superdata$strain == "Atc",]
+b6_superdata <- superdata[superdata$strain == "B6",]
 head(b6_superdata)
 ```
 
@@ -99,13 +99,13 @@ atc72_superdata <- avg_atc_superdata[avg_atc_superdata$time_point == 72,]
 b624_superdata <- avg_b6_superdata[avg_b6_superdata$time_point == 24,]
 b648_superdata <- avg_b6_superdata[avg_b6_superdata$time_point == 48,]
 b672_superdata <- avg_b6_superdata[avg_b6_superdata$time_point == 72,]
-xbarsuper <- c(mean(atc24_superdata$quantity), mean(b624_superdata$quantity), mean(atc48_superdata$quantity), mean(b648_superdata$quantity), mean(atc72_superdata$quantity),mean(b672_superdata$quantity))
-sdsuper <- c(sd(atc24_superdata$quantity), sd(b624_superdata$quantity), sd(atc48_superdata$quantity), sd(b648_superdata$quantity), sd(atc72_superdata$quantity),sd(b672_superdata$quantity))
+xbar <- c(mean(atc24_superdata$quantity), mean(b624_superdata$quantity), mean(atc48_superdata$quantity), mean(b648_superdata$quantity), mean(atc72_superdata$quantity),mean(b672_superdata$quantity))
+sd <- c(sd(atc24_superdata$quantity), sd(b624_superdata$quantity), sd(atc48_superdata$quantity), sd(b648_superdata$quantity), sd(atc72_superdata$quantity),sd(b672_superdata$quantity))
 compiled <- rbind(avg_atc_superdata,avg_b6_superdata)
 data <- tapply(compiled$quantity, list(compiled$strain,compiled$time_point), mean)
-mpsuper <- barplot(data,beside=T,col=c("blue","orange"),main="Supernatant Fraction Data",xlab="Hours Post Infection",ylab="Genome Copies per 4 µL Supernatant",ylim=c(0,1e7))
-segments(mpsuper, xbarsuper - sdsuper, mpsuper, xbarsuper + sdsuper, lwd=2)
-segments(mpsuper - 0.1, xbarsuper - sdsuper, mpsuper + 0.1, xbarsuper - sdsuper, lwd=2)
-segments(mpsuper - 0.1, xbarsuper + sdsuper, mpsuper + 0.1, xbarsuper + sdsuper, lwd=2)
+mp <- barplot(data,beside=T,col=c("blue","orange"), ylim=c(0,2e7),main="Cell Fraction Data",xlab="Hours Post Infection",ylab="Fold Change Over C57BL/6")
+segments(mp, xbar - sd, mp, xbar + sd, lwd=2)
+segments(mp - 0.1, xbar - sd, mp + 0.1, xbar - sd, lwd=2)
+segments(mp - 0.1, xbar + sd, mp + 0.1, xbar + sd, lwd=2)
 ```
 
