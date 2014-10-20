@@ -58,7 +58,7 @@ Now that I have the average of all my samples for each of the time points, I wan
 ```{r echo=FALSE}
 #plot the data
 
-compiled <- rbind(group_b6_celldata,group_atc_celldata)
+compiled <- rbind(avg_b6_celldata,avg_atc_celldata)
 data <- tapply(compiled$RQ, list(xyz$strain,xyz$time_point), sum)
 barplot(data,beside=T,col=c("blue","orange")
 ,main="Cell Fraction Data",xlab="Time Point",ylab="Fold Change Over C57BL/6")
