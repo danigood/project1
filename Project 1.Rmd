@@ -69,3 +69,19 @@ t.test(avg_atc_celldata$RQ[avg_atc_celldata$time_point == 48], avg_b6_celldata$R
 t.test(avg_atc_celldata$RQ[avg_atc_celldata$time_point == 72], avg_b6_celldata$RQ[avg_b6_celldata$time_point == 72])
 ```
 
+Now to the supernatant data.
+```{r echo=FALSE}
+atc_superdata <- superdata[celldata$strain == "Atc",]
+b6_superdata <- superdata[celldata$strain == "B6",]
+head(atc_superdata)
+head(b6_superdata)
+```
+
+
+```{r}
+#average the data replicates quantity
+avg_atc_superdata <- aggregate(.~sample_name, FUN=mean, data=atc_superdata)
+avg_b6_superdata <- aggregate(.~sample_name, FUN=mean, data=b6_superdata)
+head(avg_b6_superdata)
+```
+
