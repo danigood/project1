@@ -88,6 +88,8 @@ avg_b6_superdata <- aggregate(.~sample_name, FUN=mean, data=b6_superdata)
 head(avg_b6_superdata)
 ```
 
+Next, I want to aggregate the data by time point.
+
 ```{r echo=FALSE}
 #average the data by time point
 group_atc_superdata <- aggregate(.~time_point, FUN=mean, data=avg_atc_superdata)
